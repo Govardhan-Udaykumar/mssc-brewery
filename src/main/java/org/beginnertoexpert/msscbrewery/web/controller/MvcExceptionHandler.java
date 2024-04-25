@@ -16,6 +16,7 @@ public class MvcExceptionHandler {
 
         List<String> errors = new ArrayList<>(e.getConstraintViolations().size());
 
+
         e.getConstraintViolations().forEach(constraintViolation -> {
             errors.add(constraintViolation.getPropertyPath()+" : "+constraintViolation.getMessage());
         });

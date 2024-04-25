@@ -1,5 +1,6 @@
 package org.beginnertoexpert.msscbrewery.web.controller;
 
+import jakarta.validation.Valid;
 import org.beginnertoexpert.msscbrewery.web.model.BeerDto;
 import org.beginnertoexpert.msscbrewery.web.services.BeerService;
 import org.springframework.http.HttpHeaders;
@@ -29,7 +30,7 @@ public class BeerController {
 
 //getBeers
     @PostMapping  //post mapping..
-    public ResponseEntity<BeerDto> handlePost(@RequestBody BeerDto beerDto){
+    public ResponseEntity<BeerDto> handlePost(@Valid @RequestBody BeerDto beerDto){
         BeerDto saveBeer = beerService.saveNewBeer(beerDto);
 
         HttpHeaders headers = new HttpHeaders();
@@ -39,7 +40,7 @@ public class BeerController {
     }
 
     @PutMapping("/{beerId}")
-    public ResponseEntity<BeerDto> handleUpdate(@PathVariable("beerId") UUID beerId, @RequestBody BeerDto beerDto){
+    public ResponseEntity<BeerDto> handleUpdate(@PathVariable("beerId") UUID beerId, @Valid @RequestBody BeerDto beerDto){
         beerService.update(beerId,beerDto);
 
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
